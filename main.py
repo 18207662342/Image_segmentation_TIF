@@ -1,46 +1,19 @@
-# The path can also be read from a config file, etc.
-OPENSLIDE_PATH = "C:/czg/602/app/pycharm/ANACONDA/envs/pytorch/Lib/site-packages/openslide/openslide-win64-20220811/bin"
-
-import os
-if hasattr(os, 'add_dll_directory'):
-    # Python >= 3.8 on Windows
-    with os.add_dll_directory(OPENSLIDE_PATH):
-        import openslide
-else:
-    import openslide
-
-# import openslide
-import numpy as np
-import imageio  # 用于保存瓦片
-# os.add_dll_directory("path_to_working_dlls_directoy")
-
-def train():
-    print("aaaa")
-    print("aaaa")
-    print("aaaa")
-    print("aaaa")
-    print("aaaa")
-    slide = openslide.OpenSlide("C:/czg/602/project/Uav path planning/1.code/pycharm code/Image_segmentation/big/result.tif")
-    print("aaaa")
-    dst_path = 'C:/czg/602/project/Uav path planning/1.code/pycharm code/Image_segmentation/small1/'
-
-    [m, n] = slide.dimensions  # 得出高倍下的（宽，高）
-    print(m, n)
-    N = 1024
-    ml = N * m // N
-    nl = N * n // N
-
-    for i in range(0, ml, N):  # 这里由于只是想实现剪切功能，暂时忽略边缘不足N*N的部分
-        for j in range(0, nl, N):
-            im = np.array(slide.read_region((i, j), 0, (N, N)))
-            imageio.imwrite(dst_path + str(i) + '-' + str(j) + '.tif', im)  # patch命名为‘x-y’
-
-    slide.close()  # 关闭文件
-
-if __name__ == '__main__':
-    print("111")
-    print("aaaa")
-    print("aaaa")
-    print("aaaa")
-    print("aaaa")
-    train()
+# import cv2
+# img = cv2.imread("C:\czg/602\project/Uav path planning/1.code/pycharm code/Image_segmentation/input/photo_small/9216-2560.tif",1)
+# #第二个参数是通道数和位深的参数，
+# #IMREAD_UNCHANGED = -1#不进行转化，比如保存为了16位的图片，读取出来仍然为16位。
+# #IMREAD_GRAYSCALE = 0#进行转化为灰度图，比如保存为了16位的图片，读取出来为8位，类型为CV_8UC1。
+# #IMREAD_COLOR = 1#进行转化为RGB三通道图像，图像深度转为8位
+# #IMREAD_ANYDEPTH = 2#保持图像深度不变，进行转化为灰度图。
+# #IMREAD_ANYCOLOR = 4#若图像通道数小于等于3，则保持原通道数不变；若通道数大于3则只取取前三个通道。图像深度转为8位
+# print (img)
+# print (img.shape)
+# print (img.dtype)
+# print (img.min())
+# print (img.max())
+# #创建窗口并显示图像
+# cv2.namedWindow("Image")
+# cv2.imshow("Image",img)
+# cv2.waitKey(0)
+# #释放窗口
+# cv2.destroyAllWindows()
